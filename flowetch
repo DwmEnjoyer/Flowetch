@@ -42,6 +42,12 @@ shell="${SHELL##*/}"
 [ "$WAYLAND_DISPLAY" ] && displayprot="wayland"
 [ ! "$displayprot" ] && displayprot="tty"
 
+# Root partition space
+space=$(df -h | awk '/\/$/ { print $3}')
+
+# Terminal
+terminal="${TERM}"
+
 # GTK 3
 
 while read -r line; do
@@ -102,23 +108,23 @@ esac
 
 # Colors
 
-c0='[0m'
-c1='[31m'
-c2='[32m'
-c3='[33m'
-c4='[34m'
-c5='[35m'
-c6='[36m'
-c7='[37m'
-c8='[38m'
+c0=''
+c1=''
+c2=''
+c3=''
+c4=''
+c5=''
+c6=''
+c7=''
+c8=''
 c9='^[[37m'
 
 # Art
 
-ARTR1="${c1}     _ _    "
-ARTR2="${c1}    (_\_)   "
-ARTR3="${c1}   (__<__)  "
-ARTR4="${c1}    (_/_)   "
+ARTR1="${c5}     _ _    "
+ARTR2="${c5}    (_\_)   "
+ARTR3="${c5}   (__<__)  "
+ARTR4="${c5}    (_/_)   "
 ARTR5="${c2}    \ |     "
 ARTR6="${c2}     \|/    "
 
@@ -130,7 +136,6 @@ cat <<-EOF
  ${ARTR2}  ${c5}user${c0}    ${c2}•••   ${user}
  ${ARTR3}  ${c5}shell${c0}   ${c3}•••   ${shell}
  ${ARTR4}  ${c5}wm${c0}      ${c4}•••   ${wm}
- ${ARTR5}  ${c5}theme${c0}   ${c5}•••   ${theme}
- ${ARTR6}  ${c5}pkg${c0}     ${c6}•••   ${pkg}
-
+ ${ARTR5}  ${c5}term${c0}    ${c5}•••   ${terminal}
+ ${ARTR6}  ${c5}root${c0}    ${c6}•••   ${space}
 EOF
